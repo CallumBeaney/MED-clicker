@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "MED Click Dictionary",
+  "version": "1.0",
+  "description": "Opens a link to Michigan University's Medieval English Dictionary when you double-click a word",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "scripting",
+    "contextMenus"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "type": "module",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
