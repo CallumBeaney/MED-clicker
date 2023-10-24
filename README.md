@@ -1,4 +1,4 @@
-# MED Click Dictionary
+<img src="https://github.com/CallumBeaney/MED-clicker/blob/main/icon%402x.png">
 
 ### what is?
 This is a Firefox extension to facilitate use of the Michigan University Middle English Dictionary website, a dictionary for words used in the English languages used ~1100-1600. It opens a link to a search query for for a given word when you double click it.  
