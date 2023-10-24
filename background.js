@@ -13,7 +13,7 @@
 /// Construct options for an in-browser right-click menu and build their text content based off the initial state set above.
 browser.runtime.onInstalled.addListener( async () => {
 
-  const extensionState = await browser.storage.local.get(['functionalityToggler', 'searchFieldToggler', 'activeTabToggler']);
+  const extensionState = await browser.storage.local.get(['onOffState', 'searchField', 'activeTab']);
 
   browser.contextMenus.create({
     id: 'functionalityToggler',
@@ -37,7 +37,7 @@ browser.runtime.onInstalled.addListener( async () => {
 /// Create listeners to manage the state of the above contextMenus when the buttons are clicked
 browser.contextMenus.onClicked.addListener(async (info, tab) => {
 
-  const currentState = await browser.storage.local.get();
+  const currentState = await browser.storage.local.get(['onOffState', 'searchField', 'activeTab']);
   if (info.menuItemId === 'functionalityToggler') 
   {
     const newState = currentState.onOffState == 'on' ? 'off' : 'on';
