@@ -13,62 +13,65 @@
 /// Construct options for an in-browser right-click menu and build their text content based off the initial state set above.
 browser.runtime.onInstalled.addListener( async () => {
 
-  const extensionState = await browser.storage.local.get(); /// gets all. not supported in safari
+  const extensionState = await browser.storage.local.get(['functionalityToggler', 'searchFieldToggler', 'activeTabToggler']);
 
   browser.contextMenus.create({
-    id: "functionalityToggler",
+    id: 'functionalityToggler',
     title: (extensionState.onOffState == 'on' ? 'turn off' : 'turn on'),
-    contexts: ["all"],
+    contexts: ['all'],
   });
   browser.contextMenus.create({
-    id: "searchFieldToggler",
+    id: 'searchFieldToggler',
     title: (extensionState.searchField == 'anywhere' ? 'search headword only' : 'search entire entry'),
-    contexts: ["all"],
+    contexts: ['all'],
   });
   browser.contextMenus.create({
-    id: "activeTabToggler",
+    id: 'activeTabToggler',
     title: (extensionState.activeTab == true ? 'stay on current tab when opening a new one' : 'move to new tabs I open'),
-    contexts: ["all"],
+    contexts: ['all'],
   });
 });
 
 
+
+/// Create listeners to manage the state of the above contextMenus when the buttons are clicked
 browser.contextMenus.onClicked.addListener(async (info, tab) => {
 
   const currentState = await browser.storage.local.get();
-  if (info.menuItemId === "functionalityToggler") 
+  if (info.menuItemId === 'functionalityToggler') 
   {
     const newState = currentState.onOffState == 'on' ? 'off' : 'on';
     await browser.storage.local.set({onOffState: newState});
-    browser.contextMenus.update("functionalityToggler", {
+    browser.contextMenus.update('functionalityToggler', {
       title: (newState == 'on' ? 'turn off' : 'turn on'),
     });
   }
-  else if (info.menuItemId === "searchFieldToggler") 
+  else if (info.menuItemId === 'searchFieldToggler') 
   {
     const newState = currentState.searchField == 'anywhere' ? 'hnf' : 'anywhere';
     await browser.storage.local.set({searchField: newState});
-    browser.contextMenus.update("searchFieldToggler", {
+    browser.contextMenus.update('searchFieldToggler', {
       title: (newState == 'anywhere' ? 'search headword only' : 'search entire entry'),
     });
   }
-  else if (info.menuItemId === "activeTabToggler") 
+  else if (info.menuItemId === 'activeTabToggler') 
   {
     const newState = currentState.activeTab == true ? false : true;
     await browser.storage.local.set({activeTab: newState});
-    browser.contextMenus.update("activeTabToggler", {
+    browser.contextMenus.update('activeTabToggler', {
       title: (newState == true ? 'stay on current tab when opening a new one' : 'move to new tabs I open'),
     });
   }
 });
 
 
+/// Construct a URL upon receipt of a message from content.js and open the tab in accordance with the settings chosen with the above state configuration
 browser.runtime.onMessage.addListener(async function(message) {
 
-  const MED_URL = "https://quod.lib.umich.edu/m/middle-english-dictionary/dictionary?utf8=✓&search_field=";
+  const MED_URL = 'https://quod.lib.umich.edu/m/middle-english-dictionary/dictionary?utf8=✓&search_field=';
   const state = await browser.storage.local.get();
   
-  const completeURL = MED_URL + state.searchField + "&q=" + message.word;
+  const completeURL = MED_URL + state.searchField + '&q=' + message.word;
 
   let createTab = browser.tabs.create({
     url: completeURL,
