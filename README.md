@@ -9,14 +9,14 @@ You can change the settings in a menu when you right-click your mouse in the bro
 - whether you want new tabs to open in the background or not.
 
 ### Places you can test this
-- The largest unannotated text resource, and one for which this extension is most suited, is the University of Michigan's [Corpus of Middle English Prose and Verse](https://quod.lib.umich.edu/c/cme/).
+- University of Michigan's [Corpus of Middle English Prose and Verse](https://quod.lib.umich.edu/c/cme/).
 - Centre for Medieval and Early Modern Studies, University of Kent's [MEMSlib](https://www.memslib.co.uk/middle-english-texts) contains many digitizations.
 - Harvard's [Geoffery Chaucer Website](https://chaucer.fas.harvard.edu/pages/john-gower-1325-1403).
 - The International John Gower Society's [Original Language Editions](https://johngower.org/online-editions/).
-- You might check an old cookbook like [The Forme of Cury](https://www.gutenberg.org/cache/epub/8102/pg8102.txt), as edited by Samuel Pegge.
+- You might check an old cookbook like [The Forme of Cury](https://www.gutenberg.org/cache/epub/8102/pg8102.txt).
 
 ### why?
-The Michigan University Middle English Dictionary is pretty much the best resource for looking up Middle English words on the internet, but unfortunately, according to a member of staff, forestalling an open-source MED has been their primary target until now. This way the proprietary data is not expropriated but at the very least, slow website navigation and general lookup UX can be slightly sped up by a simple "double-tap to search" function.
+The MED is the best resource for reading old texts but isn't available in any other format. The website is slow to load, slow to use and repeatedly going back and forth between tabs is slow. Double-click → entry is fast.
 
 ## how does it work?
 When you double-click/tap a word in a webpage, your browser highlights that word and temporarily saves it in your browser's local data storage. I can then custom build a link to that word programmatically.
